@@ -1,8 +1,8 @@
-EXECUTABLES = closure-compiler cat echo
+EXECUTABLES = google-closure-compiler cat echo mkdir printf bash
 K := $(foreach exec,$(EXECUTABLES),\
         $(if $(shell which $(exec)),some string,$(error Dependency $(exec) not in PATH)))
 
-CLOSURE = closure-compiler
+CLOSURE = google-closure-compiler
 CLOSUREFLAGS = --compilation_level ADVANCED_OPTIMIZATIONS
 CLOSURECMD = $(CLOSURE) $(CLOSUREFLAGS)
 
