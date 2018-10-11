@@ -1,16 +1,63 @@
 # yt-jailbreak
 YouTube Jailbroken
 
-`make` to compile
+A bookmarklet that unlocks a lot of the restrictions set on YouTube mobile.
 
-Dependencies for compilation:
-`bash` and `google-closure-compiler`
+## Features:
+1. Speed control
+    - Arbitrary and negative speeds allowed
+    - (iPad) Click the video playback time to change speed
+    - (iPhone) Open the side menu
+2. Automatic ad-skipping
+    - Skips ads regardless of if they're skippable or not
+    - Skips ads of any length
+3. (iPad only) WebKit native fullscreen
+    - Proper fullscreen without browser chrome
+    - Allows Picture-in-Picture for listening to music outside of the browser
+4. Adds "Jailbroken" to the status bar (which looks cool).
 
-*NOTE:* use `google-closure-compiler` from `npm`
-`# npm i -g google-closure-compiler`
-
-DON'T INSTALL FROM A PACKAGE MANAGER, USE `npm`
-
+# Installation
+Bookmark this page, then edit the bookmark. Paste the bookmarklet code below into the URL field.
 ```javascript
 javascript:%28new%20Function%28atob%28%22ZnVuY3Rpb24gYihhKXtyZXR1cm4gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihhKX12YXIgYz1iKCIuaGVhZGVyLWJhci1jb250ZW50Lm5vbi1zZWFyY2gtbW9kZS5jYm94IC50aXRsZSIpLGY9YigidmlkZW8iKTtpZigtMSE9PWMuZ2V0QXR0cmlidXRlKCJhcmlhLWxhYmVsIikuaW5kZXhPZigiSmFpbGJyb2tlbiIpKXRocm93IEVycm9yKCJBbHJlYWR5IGphaWxicm9rZW4iKTtpZighL20ueW91dHViZS5jb20vLnRlc3Qod2luZG93LmxvY2F0aW9uKSl0aHJvdyBFcnJvcigiTm90IHl0Iik7CmZ1bmN0aW9uIGcoKXt2YXIgYT1iKCIubWVudS1jb250YWluZXIgLm1lbnUtY29udGVudCIpLGQ9ISFmJiZudWxsIT1mLmdldEF0dHJpYnV0ZSgidGl0bGUiKTshYigiI2p2c2MiKSYmYSYmZCYmKGEuaW5uZXJIVE1MKz0nPGEgaHJlZj0iamF2YXNjcmlwdDp2b2lkKDApOyIgaWQ9Imp2c2MiPjx5dG0tbWVudS1pdGVtPjxidXR0b24gY2xhc3M9Im1lbnUtaXRlbS1idXR0b24iPlZpZGVvIFNwZWVkIChKYWlsYnJlYWspPC9idXR0b24%2BPC95dG0tbWVudS1pdGVtPjwvYT4nLGIoIiNqdnNjIikuYWRkRXZlbnRMaXN0ZW5lcigiY2xpY2siLGZ1bmN0aW9uKCl7dmFyIGE9cGFyc2VGbG9hdChwcm9tcHQoIlNwZWVkOiIpKTtpc05hTihhKXx8KGYucGxheWJhY2tSYXRlPWEpfSkpfQpmdW5jdGlvbiBrKCl7dmFyIGE9YigiLmpzdCIpLGQ9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiY2FudmFzIikuZ2V0Q29udGV4dCgiMmQiKTtkLmZvbnQ9IjIycHggUm9ib3RvIjthLnN0eWxlLndpZHRoPU1hdGguY2VpbChkLm1lYXN1cmVUZXh0KGEudmFsdWUpLndpZHRoKSsyKyJweCJ9CmZ1bmN0aW9uIGwoKXt2YXIgYT1iKCIueXRwLXRpbWUtZGlzcGxheSIpLGQ9ISFmJiZudWxsIT1mLmdldEF0dHJpYnV0ZSgidGl0bGUiKSYmISFhO2lmKCFiKCIuanN0IikmJmQpe2IoIi55dHAtdGltZS1zZXBhcmF0b3IiKS5pbm5lckhUTUwrPSc8c3BhbiBjbGFzcz0iangiIHN0eWxlPSJkaXNwbGF5OiBub25lOyI%2BKDxpbnB1dCBjbGFzcz0ianN0IiB0eXBlPSJudW1iZXIiIHZhbHVlPSIxIiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjogI2ZmZjsgY29sb3I6ICMwMDA7IG1hcmdpbjogMCAycHg7IGhlaWdodDogaW5oZXJpdDsgcGFkZGluZzogMDsiPngpPC9zcGFuPic7dmFyIGU9YigiLmpzdCIpLGg9YigiLmp4Iik7WyJpbnB1dCIsInByb3BlcnR5Y2hhbmdlIiwicGFzdGUiXS5mb3JFYWNoKGZ1bmN0aW9uKGEpe2UuYWRkRXZlbnRMaXN0ZW5lcihhLGZ1bmN0aW9uKCl7Zi5wYXVzZSgpO2soKTt2YXIgYT1wYXJzZUZsb2F0KGUudmFsdWUpO2lzTmFOKGEpfHwoZi5wbGF5YmFja1JhdGU9CmEpfSl9KTtlLmFkZEV2ZW50TGlzdGVuZXIoImZvY3Vzb3V0IixmdW5jdGlvbigpe2guc3R5bGUuZGlzcGxheT0ibm9uZSJ9KTthLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIixmdW5jdGlvbigpe2YucGF1c2UoKTtlLnZhbHVlPWYucGxheWJhY2tSYXRlO2soKTtoLnN0eWxlLmRpc3BsYXk9ImlubGluZS1ibG9jayI7ZS5mb2N1cygpO2Uuc2VsZWN0KCk7ZS5zZXRTZWxlY3Rpb25SYW5nZSgwLGUudmFsdWUubGVuZ3RoKX0pfX1mdW5jdGlvbiBtKGEpey0xIT09YS50YXJnZXQuY2xhc3NOYW1lLmluZGV4T2YoImZ1bGwtc2NyZWVuIikmJihhLnN0b3BQcm9wYWdhdGlvbigpLGYud2Via2l0RW50ZXJGdWxsU2NyZWVuKCkpfXZhciBuPS9pUGg%2Fby8udGVzdChuYXZpZ2F0b3IudXNlckFnZW50KTsKc2V0SW50ZXJ2YWwoZnVuY3Rpb24oKXtmPWIoInZpZGVvIik7YigiZGl2Lnl0cC1hZC10ZXh0IikmJihmLnBsYXkoKSxmLmN1cnJlbnRUaW1lPWYuZHVyYXRpb24tLjA1KTtuJiZnKCk7dmFyIGE9YigiLnl0cC1jaHJvbWUtY29udHJvbHMiKTtiKCIueXRwLWZ1bGxzY3JlZW4tYnV0dG9uIikmJmEmJmEuYWRkRXZlbnRMaXN0ZW5lcigiY2xpY2siLG0sITApO2woKTtpZihhPWIoIi55dHAtdGltZS1kdXJhdGlvbiIpKXthLmlubmVySFRNTD1hLmlubmVySFRNTC5yZXBsYWNlKC9cKFswLTkuXSt4XCkgL2csIiIpO3ZhciBkPWIoIi5qeCIpOzE9PWYucGxheWJhY2tSYXRlfHxkJiYiaW5saW5lLWJsb2NrIj09PWQuc3R5bGUuZGlzcGxheXx8KGEuaW5uZXJIVE1MPSIoIitmLnBsYXliYWNrUmF0ZSsieCkgIithLmlubmVySFRNTCl9LTE9PT1jLmdldEF0dHJpYnV0ZSgiYXJpYS1sYWJlbCIpLmluZGV4T2YoIkphaWxicm9rZW4iKSYmYy5zZXRBdHRyaWJ1dGUoImFyaWEtbGFiZWwiLGMuZ2V0QXR0cmlidXRlKCJhcmlhLWxhYmVsIikrCiIgKEphaWxicm9rZW4pIik7LTE9PT1jLmlubmVySFRNTC5pbmRleE9mKCJKYWlsYnJva2VuIikmJihjLmlubmVySFRNTD1jLmdldEF0dHJpYnV0ZSgiYXJpYS1sYWJlbCIpKX0sMTAwKTsK%22%29%29%29%28%29%3B
 ```
+
+## Usage
+Navigate to a YouTube page in the browser then click the bookmark. It's that simple!
+
+## FAQ
+*Will it work with the app?*
+
+No.
+
+*Do you plan to make it work with the app?*
+
+No. I can't run code there, so it won't happen.
+
+# Building
+
+Before you compile, you need to install the dependencies on your system.
+On Ubuntu/Debian (as root):
+```bash
+apt-get install npm bash make git
+npm i -g google-closure-compiler
+```
+*Use `google-closure-compiler` on npm. Versions in package managers are outdated and may not support ES2015.*
+
+Clone the repository:
+```bash
+git clone https://github.com/nununoisy/yt-jailbreak
+cd yt-jailbreak
+```
+
+Clean the build directories (unless you're building for the first time):
+```bash
+make clean
+```
+
+Compile yt-jailbreak:
+```bash
+make
+```
+
+The finished URL will be written to `build/yt-jailbreak-url`.
