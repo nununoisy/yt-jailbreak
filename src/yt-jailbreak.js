@@ -32,10 +32,9 @@ function addMenuItems() {
     if (notAlreadyAdded && !!list && videovisible) {
         var toAdd = '<a href="javascript:void(0);" id="jvsc"><ytm-menu-item><button class="menu-item-button">Video Speed (Jailbreak)</button></ytm-menu-item></a>';
         list.innerHTML += toAdd;
-        q("#jvsc").addEventListener("click",() => { 
+        q("#jvsc").addEventListener("click", () => {
             var speed = parseFloat(prompt("Speed:"));
-            if (isNaN(speed)) return;
-            video.playbackRate = speed;
+            if (!isNaN(speed)) video.playbackRate = speed;
         });
     }
 }
@@ -43,8 +42,8 @@ function addMenuItems() {
 function changeSpeedBoxSize() {
     var text = q('.jst');
     var context = document.createElement("canvas").getContext("2d");
-	context.font = "22px Roboto";
-	var width = Math.ceil(context.measureText(text.value).width);
+    context.font = "22px Roboto";
+    var width = Math.ceil(context.measureText(text.value).width) + 2;
     text.style.width = width + "px";
 }
 
@@ -52,23 +51,25 @@ function addSpeedController() {
     var counter = q(".ytp-time-display");
     var videovisible = (!!video && video.getAttribute("title") != null && !!counter);
     if (!q('.jst') && videovisible) {
-        var toAdd = '<span class="jx" style="display: none;">(<input class="jst" type="number" value="1" style="background-color: #fff; margin: 0px 2px; height: 3rem; padding: 10px 2px;">x)</span>';
+        var toAdd = '<span class="jx" style="display: none;">(<input class="jst" type="number" value="1" style="background-color: #fff; color: #000; margin: 0 2px; height: inherit; padding: 0;">x)</span>';
         q('.ytp-time-separator').innerHTML += toAdd;
         var text = q('.jst');
         var xspan = q('.jx');
         ['input', 'propertychange', 'paste'].forEach(evtname => {
-            text.addEventListener(evtname,() => {
+            text.addEventListener(evtname, () => {
                 video.pause();
                 changeSpeedBoxSize();
-                video.playbackRate = parseFloat(text.value);
+                var speed = parseFloat(text.value);
+                if (!isNaN(speed)) video.playbackRate = speed;
             });
         });
         const xdisp = on => xspan.style.display = (on ? "inline-block" : "none");
-        text.addEventListener('focusout',() => {
+        text.addEventListener('focusout', () => {
             xdisp(false);
         });
-        counter.addEventListener('click',() => {
+        counter.addEventListener('click', () => {
             video.pause();
+            text.value = video.playbackRate;
             changeSpeedBoxSize();
             xdisp(true);
             text.focus();
@@ -78,14 +79,18 @@ function addSpeedController() {
     }
 }
 
-function changeFullscreenEvent() {
-    var button = q(".ytp-fullscreen-button.ytp-button");
-    if (!!button) {
-        button.addEventListener("click", event => {
-            event.stopPropagation();
-            video.webkitEnterFullScreen();
-        });
+function fullScreenHandler(event) {
+    //alert(event.target.className); alert(event.target == button);
+    if (event.target.className.indexOf('full-screen') !== -1) {
+        event.stopPropagation();
+        video.webkitEnterFullScreen();
     }
+}
+
+function changeFullscreenEvent() {
+    var button = q(".ytp-fullscreen-button");
+    var controls = q(".ytp-chrome-controls");
+    if (!!button && !!controls) controls.addEventListener("click", fullScreenHandler, true);
 }
 
 function speedUpdate() {
@@ -104,7 +109,7 @@ function adDetect() {
     if (adon) {
         video.play();
         video.currentTime = video.duration - 0.05;
-        video.play();
+        //video.play();
     }
 }
 //        /iPhone|iPod/
