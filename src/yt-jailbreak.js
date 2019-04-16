@@ -81,7 +81,7 @@ function addSpeedController() {
 
 function fullScreenHandler(event) {
     //alert(event.target.className); alert(event.target == button);
-    if (event.target.className.indexOf('full-screen') !== -1) {
+    if (event.target.className.match(/full-screen(-close){0}$/g)) {
         event.stopPropagation();
         video.webkitEnterFullScreen();
     }
